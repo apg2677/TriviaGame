@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $("#start").click(QuizTimer);
     $("#stop").click(StopTimer)
-
+    $("#btnSubmit").click(CheckAnswer);
 });
 
 
@@ -14,7 +14,7 @@ var model = [{
     Correct: 2
 }];
 var q;
-
+var answer;
 function GenerateQuestion() {
     $("#question").text(model[0].Question);
     for (var i = 0; i < model[0].Answers.length; i++) {
@@ -22,7 +22,7 @@ function GenerateQuestion() {
         var choiceInput = "<input type=\"radio\" name=\"answer\" value=\"" + tempAnswer + "\">" + tempAnswer + "</input>";
         $("#answerChoice").append(choiceInput);
     }
-    var answer = model[0].Answers[model[0].Correct];
+    answer = model[0].Answers[model[0].Correct];
     console.log(answer);
 }
 
@@ -36,4 +36,16 @@ function QuizTimer() {
 
 function StopTimer() {
     clearInterval(q);
+}
+
+function CheckAnswer() {
+    var radioValue = $("input[name='answer']:checked").val();
+    if(radioValue===answer) {
+        console.log("Correct!");
+
+    }
+    else {
+        console.log("Incorrect!");
+    }
+
 }
