@@ -2,6 +2,7 @@ var q;
 var answer;
 var score = 0;
 var next = 0;
+var t = 10;
 
 var model = [{
     Question: "What is georges middle name?",
@@ -10,6 +11,26 @@ var model = [{
 }, {
     Question: "Which president was martin van buren?",
     Answers: ["Eighth", "First", "Third", "Tenth"],
+    Correct: 0
+},
+{
+    Question: "Who is jerry's worst enemy",
+    Answers: ["Kramer", "George", "The Drake", "Newman"],
+    Correct: 3
+}
+    , {
+    Question: "Which famous baseball player does elaine date?",
+    Answers: ["Mike Schmidt", "Joe Dimagio", "Jackie Robison", "Keith Hernandez"],
+    Correct: 3
+},
+{
+    Question: "What company did george pretend to apply for?",
+    Answers: ["Vandelay Industries", "Cinnabon", "Google", "Apple"],
+    Correct: 0
+},
+{
+    Question: "What job does george pretend to be?",
+    Answers: ["Architect", "Teacher", "Policeman", "Attorney"],
     Correct: 0
 }
 ];
@@ -20,7 +41,7 @@ var max = model.length;
 
 
 $(document).ready(function () {
-    
+
     GenerateQuestion(next);
 
     $("#start").click(QuizTimer);
@@ -44,10 +65,17 @@ function GenerateQuestion(q) {
 }
 
 function QuizTimer() {
-    var t = 10;
+    t = 10;
     q = setInterval(function () {
         $("#Timer").text(t);
         t--;
+        if (t < 1) {
+            next++;
+            t = 10;
+            $("#answerChoice").empty();
+            $("#question").empty();
+            GenerateQuestion(next);
+        }
     }, 1000);
 }
 
@@ -55,25 +83,44 @@ function StopTimer() {
     clearInterval(q);
 }
 
+function ResetTimer() {
+    clearInterval(q);
+    QuizTimer();
+}
+
 function CheckAnswer() {
     var radioValue = $("input[name='answer']:checked").val();
     if (radioValue === answer) {
         console.log("Correct!");
         score++;
+        CorrectAlert();
+        ResetTimer();
         $("#score").text(score);
     }
     else {
         console.log("Incorrect!");
+        WrongAlert();
     }
     $("#answerChoice").empty();
     $("#question").empty();
     next++;
-    if(next < max)
-    {
+    if (next < max) {
         GenerateQuestion(next);
-    }   
+    }
     else {
         $("#message").text("Game Over!");
     }
 
+}
+function CorrectAlert() {
+        $("#message").animate({opacity:1}, 500);
+        $("#message").text("Correct!");
+        $("#message").animate({opacity:0}, 1000);
+        
+}
+function WrongAlert() {
+    $("#message").animate({opacity:1}, 500);
+    $("#message").text("Wrong!").css("color", "red");
+    $("#message").animate({opacity:0}, 1000);
+    
 }
