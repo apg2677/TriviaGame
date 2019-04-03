@@ -1,3 +1,15 @@
+var q;
+var answer;
+var score=0;
+
+var model = [{
+    Question: "What is georges middle name",
+    Answers: ["Bob", "John", "Luis", "Phil"],
+    Correct: 2
+}];
+
+
+
 $(document).ready(function () {
     GenerateQuestion();
 
@@ -8,13 +20,6 @@ $(document).ready(function () {
 
 
 
-var model = [{
-    Question: "What is georges middle name",
-    Answers: ["Bob", "John", "Luis", "Phil"],
-    Correct: 2
-}];
-var q;
-var answer;
 function GenerateQuestion() {
     $("#question").text(model[0].Question);
     for (var i = 0; i < model[0].Answers.length; i++) {
@@ -42,7 +47,8 @@ function CheckAnswer() {
     var radioValue = $("input[name='answer']:checked").val();
     if(radioValue===answer) {
         console.log("Correct!");
-
+        score++;
+        $("#score").text(score);
     }
     else {
         console.log("Incorrect!");

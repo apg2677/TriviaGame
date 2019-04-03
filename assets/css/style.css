@@ -21,3 +21,12 @@ input {
     height:100px;
     background: #fff;
 }
+#message {
+    color:green;
+}
+
+.dash {
+    
+    margin-top:100px;
+
+}
