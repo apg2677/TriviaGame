@@ -1,8 +1,23 @@
 .container 
 {
     background: #ccc;
+    height:600px;
+    border:2px solid black;
+    border-radius:4px;
     
 }
 body {
-    
+    padding:15px;
+}
+
+input {
+    padding:5px;
+    margin-left:15px;
+
+}
+
+.controls 
+{   margin:10px;
+    height:100px;
+    background: #fff;
 }
