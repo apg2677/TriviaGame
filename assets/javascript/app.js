@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     GenerateQuestion(next);
 
-    $("#start").click(QuizTimer);
+    $("#start").click(Restart);
     $("#stop").click(StopTimer)
     $("#btnSubmit").click(CheckAnswer);
 });
@@ -100,6 +100,7 @@ function CheckAnswer() {
     else {
         console.log("Incorrect!");
         WrongAlert();
+        ResetTimer();
     }
     $("#answerChoice").empty();
     $("#question").empty();
@@ -108,19 +109,28 @@ function CheckAnswer() {
         GenerateQuestion(next);
     }
     else {
+        StopTimer();
+        Restart();
         $("#message").text("Game Over!");
     }
 
 }
 function CorrectAlert() {
-        $("#message").animate({opacity:1}, 500);
-        $("#message").text("Correct!");
-        $("#message").animate({opacity:0}, 1000);
-        
+    $("#message").animate({ opacity: 1 }, 500);
+    $("#message").text("Correct!");
+    $("#message").animate({ opacity: 0 }, 1000);
+
 }
 function WrongAlert() {
-    $("#message").animate({opacity:1}, 500);
+    $("#message").animate({ opacity: 1 }, 500);
     $("#message").text("Wrong!").css("color", "red");
-    $("#message").animate({opacity:0}, 1000);
-    
+    $("#message").animate({ opacity: 0 }, 1000);
+
+}
+
+function Restart() {
+    QuizTimer();
+    score = 0;
+    next = 0;
+    t = 10;
 }
