@@ -47,6 +47,7 @@ $(document).ready(function () {
     $("#start").click(Restart);
     $("#stop").click(StopTimer)
     $("#btnSubmit").click(CheckAnswer);
+    $("#restart").click(Restart);
 });
 
 
@@ -129,8 +130,12 @@ function WrongAlert() {
 }
 
 function Restart() {
-    QuizTimer();
+    alert("restart!");
     score = 0;
     next = 0;
     t = 10;
+    q=0;
+    resetTimer();
+   
+    GenerateQuestion();
 }
