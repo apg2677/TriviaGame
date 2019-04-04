@@ -1,8 +1,12 @@
+
+const maxtime = 3;
 var q;
 var answer;
 var score = 0;
 var next = 0;
-var t = 10;
+var t = maxtime;
+
+
 
 var model = [{
     Question: "What is georges middle name?",
@@ -48,6 +52,7 @@ $(document).ready(function () {
 
 
 function Initialize() {
+    $("#Timer").text(maxtime);
     GenerateQuestion(next);
     $("#start").click(QuizTimer);
     $("#stop").click(StopTimer);
@@ -69,7 +74,7 @@ function GenerateQuestion(q) {
 }
 
 function QuizTimer() {
-    t = 10;
+    t = maxtime;
     q = setInterval(function () {
         $("#Timer").text(t);
         t--;
@@ -80,10 +85,10 @@ function QuizTimer() {
 function CheckTimer() {
     if (t < 1) {
         next++;
-        t = 10;
+        t = maxtime;
         $("#answerChoice").empty();
         $("#question").empty();
-        GenerateQuestion(next);
+        NextQuestion(next);
     }
 }
 
@@ -110,6 +115,10 @@ function CheckAnswer() {
         WrongAlert();
         ResetTimer();
     }
+    NextQuestion();
+
+}
+function NextQuestion() {
     $("#answerChoice").empty();
     $("#question").empty();
     next++;
@@ -117,12 +126,10 @@ function CheckAnswer() {
         GenerateQuestion(next);
     }
     else {
-        StopTimer();
-        Restart();
-        $("#message").text("Game Over!");
+        GameOver();
     }
-
 }
+
 function CorrectAlert() {
     $("#message").animate({ opacity: 1 }, 500);
     $("#message").text("Correct!").css("color", "green");
@@ -138,21 +145,17 @@ function WrongAlert() {
 
 function Restart() {
     q=0;
-   
     score = 0;
     next = 0;
-    t = 10;
+    t = maxtime;
     $("#score").text(score);
     $("#answerChoice").empty();
     $("#question").empty();
     Initialize();
+}
 
-    // alert("restart!");
-    // score = 0;
-    // next = 0;
-    // t = 10;
-    // q=0;
-    // resetTimer();
-
-    // GenerateQuestion();
+function GameOver() {
+    StopTimer();
+    // Restart();
+    $("#message").text("Game Over!").css("opacity", 1);
 }
