@@ -42,15 +42,18 @@ var max = model.length;
 
 $(document).ready(function () {
 
-    GenerateQuestion(next);
-
-    $("#start").click(Restart);
-    $("#stop").click(StopTimer)
-    $("#btnSubmit").click(CheckAnswer);
-    $("#restart").click(Restart);
+    Initialize();
 });
 
 
+
+function Initialize() {
+    GenerateQuestion(next);
+    $("#start").click(Restart);
+    $("#stop").click(StopTimer);
+    $("#btnSubmit").click(CheckAnswer);
+    $("#restart").click(Restart);
+}
 
 function GenerateQuestion(q) {
 
@@ -70,14 +73,18 @@ function QuizTimer() {
     q = setInterval(function () {
         $("#Timer").text(t);
         t--;
-        if (t < 1) {
-            next++;
-            t = 10;
-            $("#answerChoice").empty();
-            $("#question").empty();
-            GenerateQuestion(next);
-        }
+        CheckTimer();
     }, 1000);
+}
+
+function CheckTimer() {
+    if (t < 1) {
+        next++;
+        t = 10;
+        $("#answerChoice").empty();
+        $("#question").empty();
+        GenerateQuestion(next);
+    }
 }
 
 function StopTimer() {
@@ -130,12 +137,22 @@ function WrongAlert() {
 }
 
 function Restart() {
-    alert("restart!");
+    q=0;
+   
     score = 0;
     next = 0;
     t = 10;
-    q=0;
-    resetTimer();
-   
-    GenerateQuestion();
+  
+    $("#answerChoice").empty();
+    $("#question").empty();
+    Initialize();
+
+    // alert("restart!");
+    // score = 0;
+    // next = 0;
+    // t = 10;
+    // q=0;
+    // resetTimer();
+
+    // GenerateQuestion();
 }
