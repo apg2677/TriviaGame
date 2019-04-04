@@ -4,7 +4,11 @@
     height:600px;
     border:2px solid black;
     border-radius:4px;
-    
+    background-image: url("../images/kramerprotrait.jpeg");
+    background-repeat: no-repeat;
+    background-position-x: 92%;
+    background-position-y: 25%;
+
 }
 body {
     padding:15px;
