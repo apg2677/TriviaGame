@@ -49,7 +49,7 @@ $(document).ready(function () {
 
 function Initialize() {
     GenerateQuestion(next);
-    $("#start").click(Restart);
+    $("#start").click(QuizTimer);
     $("#stop").click(StopTimer);
     $("#btnSubmit").click(CheckAnswer);
     $("#restart").click(Restart);
