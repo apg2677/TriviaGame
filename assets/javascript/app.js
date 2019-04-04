@@ -117,7 +117,7 @@ function CheckAnswer() {
 }
 function CorrectAlert() {
     $("#message").animate({ opacity: 1 }, 500);
-    $("#message").text("Correct!");
+    $("#message").text("Correct!").css("color", "green");
     $("#message").animate({ opacity: 0 }, 1000);
 
 }
