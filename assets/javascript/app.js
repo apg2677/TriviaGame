@@ -142,7 +142,7 @@ function Restart() {
     score = 0;
     next = 0;
     t = 10;
-  
+    $("#score").text(score);
     $("#answerChoice").empty();
     $("#question").empty();
     Initialize();
