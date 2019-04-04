@@ -1,5 +1,5 @@
 
-const maxtime = 3;
+const maxtime = 7;
 var q;
 var answer;
 var score = 0;
@@ -151,6 +151,7 @@ function Restart() {
     $("#score").text(score);
     $("#answerChoice").empty();
     $("#question").empty();
+    $("#message").empty();
     Initialize();
 }
 
